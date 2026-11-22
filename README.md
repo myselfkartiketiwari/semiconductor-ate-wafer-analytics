@@ -10,6 +10,7 @@ In high-volume semiconductor testing, Automated Test Equipment (ATE) machine tim
 2. **Six Sigma Process Capability ($C_{pk}$) Auditing:** Automatically flags out-of-spec parametric distributions (`Leakage_Current_mA` at $C_{pk} = 0.48$, `Clock_Freq_MHz` at $C_{pk} = 1.27$) against the $C_{pk} \ge 1.33$ industry benchmark.
 3. **ATE Test-Time & Cost Reduction:** Identifies highly correlated electrical tests ($|r| > 0.95$)—eliminating redundant `Standby_Power_mW` ($r = 1.00$) and `Thermal_Drift_C` ($r = 0.96$) measurements to cut probe time by **33.3%** (**472.7 ATE hours / ~$136K annual savings** per 10,000 wafers).
 4. **Spatial Defect Signature Classification:** Extracts geometric features (`Radius` and diagonal offset $|X - Y|$) on failing dies to classify **Edge-Ring Etch Drift** vs. **Robotic Handling Scratches** with **92.45% test accuracy** in `0.29s`.
+5. **SQL Fab Data Warehousing (wafer_yield_queries.sql):** Authored analytical SQL queries against an SQLite ATE database using Common Table Expressions (CTE), WINDOW functions (RANK() OVER), HAVING SLA alerts, and spatial coordinate filtering to rank top failing dies and isolate defective wafer zones.
 
 ## How to Run Locally
 ```bash
@@ -20,5 +21,5 @@ python wafer_ate_analytics.py
 ```
 
 ## Tech Stack
-* **Languages & Libraries:** Python, Pandas, NumPy, SciPy, Scikit-learn, Matplotlib, Seaborn
-* **Statistical & ML Methods:** One-Way ANOVA (`f_oneway`), Pearson Correlation Matrix, Process Capability ($C_{pk}$), Spatial Feature Engineering, Random Forest Classification
+* Languages & Databases: Python, SQL (SQLite), Pandas, NumPy, SciPy, Scikit-learn, Matplotlib, Seaborn
+* Statistical & ML Methods: One-Way ANOVA (f_oneway), Pearson Correlation Matrix, Process Capability ($C_{pk}$), Spatial Feature Engineering, Random Forest Classification, SQL Window Functions (RANK())
